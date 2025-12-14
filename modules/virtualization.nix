@@ -1,0 +1,36 @@
+{ pkgs, config, ... }:
+
+{
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu;
+      runAsRoot = false;
+    };
+  };
+
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+    autoPrune = {
+      enable = true;
+      dates = "weekly";
+    };
+    daemon.settings = {
+      ipv6 = true;
+      live-restore = true;
+      experimental = true;
+    };
+  };
+
+  environment.systemPackages = with pkgs; [
+    qemu
+    quickemu
+    spice-gtk
+    virt-manager
+    docker-compose
+  ];
+}
