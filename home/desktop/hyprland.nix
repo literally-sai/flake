@@ -29,10 +29,11 @@
       "$colorPicker" = "hyprpicker";
       "$snap" = "snap";
       "$activateNightMode" = "hyprsunset --temperature 1000";
-      "$disableNightMode" = "pkill hyprsunset";
+      "$disableNightMode" = "systemctl stop --user hyprsunset";
       "$toggleSound" = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
       "$setSound100" = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 100%";
       "$toggleWaybar" = "pkill -SIGUSR1 waybar";
+      "$stopRecording" = "pkill wf-recorder";
 
       env = [
         "XCURSOR_THEME,Bibata-Modern-Ice"
@@ -186,6 +187,7 @@
 
         "$MOD_SHIFT, R, exec, $snap film"
         "$MOD_CTRL, R, exec, $snap film_selection"
+        "$MOD_ALT, R, exec, $stopRecording"
 
         "$MOD, H, movefocus, l"
         "$MOD, L, movefocus, r"
@@ -265,7 +267,7 @@
     };
 
     extraConfig = ''
-	source = ~/.config/rice/current/border.conf
+      	source = ~/.config/rice/current/border.conf
     '';
   };
 }
