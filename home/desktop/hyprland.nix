@@ -69,11 +69,8 @@
         border_size = 2;
         resize_on_border = true;
         hover_icon_on_border = true;
-        resize_corner = 3;
 
         allow_tearing = false;
-        #        "col.active_border" = "rgba(f0f0f0cc) rgba(e0e8ff99) 45deg";
-        #        "col.inactive_border" = "rgba(f0f0f088)";
 
         layout = "dwindle";
 
@@ -129,7 +126,7 @@
         if hostName == "Ghylak" then
           [
             "DP-2,1920x1080@60,0x180,1"
-            "DP-3,2560x1440@60,1920x0,1"
+            "DP-3,2560x1440@60,1920x0,1.33"
             ",preferred,auto,1"
           ]
         else if hostName == "Murgo" then
