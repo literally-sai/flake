@@ -33,6 +33,12 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
+  environment = {
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+    };
+  };
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
