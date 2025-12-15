@@ -73,7 +73,7 @@
               echo "Usage: devshell <shell-name>"
               return 1
           fi
-          nix develop ~/git/flake/devShells.#"$1"
+          nix develop ~/git/flake/devShells/$1
       }
     '';
   };
