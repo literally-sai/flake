@@ -5,5 +5,7 @@
     tiled
     udev.dev
     ntfs3g
+    gdb
+    valgrind
   ];
 }
