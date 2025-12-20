@@ -27,6 +27,7 @@
 
       "custom/spotify" = {
         format = "";
+        tooltip = false;
         interval = 5;
         exec = "echo ";
         exec-if = "pgrep spotify";
@@ -34,6 +35,7 @@
 
       "custom/discord" = {
         format = "";
+        tooltip = false;
         interval = 5;
         exec = "echo ";
         exec-if = "pgrep -f vesktop";
@@ -41,6 +43,7 @@
 
       "custom/steam" = {
         format = "";
+        tooltip = false;
         interval = 5;
         exec = "echo ";
         exec-if = "pgrep steam";
@@ -48,6 +51,7 @@
 
       "custom/recorder" = {
         format = "";
+        tooltip = false;
         interval = 5;
         exec = "echo ";
         exec-if = "pgrep wf-recorder";
@@ -96,6 +100,7 @@
           "󰤨"
         ];
         format-linked = "󰤩 ";
+        tooltip = false;
         format-ethernet = "󰈀 ";
         format-disconnected = "󰤮 ";
       };
@@ -119,6 +124,7 @@
 
       clock = {
         format = "{:%H:%M}";
+        tooltip = false;
       };
 
       "group/right" = {
