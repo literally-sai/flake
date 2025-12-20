@@ -66,7 +66,7 @@
 
       pulseaudio = {
         format = "{icon} {volume}%";
-        format-bluetooth = "󰂯{icon}";
+        format-bluetooth = "󰥰 {volume}%";
         format-bluetooth-muted = "󰝟 ";
         format-muted = "󰝟 ";
         format-icons = {
