@@ -64,7 +64,7 @@ let
     }
     #workspaces {
       background: ${colors.background};
-      border-radius: 10px;
+      border-radius: 3px;
       padding: 0 8px;
       margin: 4px 4px 4px 8px;
     }
@@ -76,9 +76,9 @@ let
       color: ${colors.highlight};
       font-weight: 900;
     }
-    #group-middle {
-      background: ${colors.foreground};
-      border-radius: 10px;
+    #middle {
+      background: ${colors.background};
+      border-radius: 3px;
       padding: 0 12px;
       margin: 4px 4px;
     }
@@ -92,9 +92,9 @@ let
       padding: 0 6px;
       min-width: 20px;
     }
-    #group-right {
-      background: ${colors.foreground};
-      border-radius: 10px;
+    #right {
+      background: ${colors.background};
+      border-radius: 3px;
       padding: 0 8px;
       margin: 4px 8px 4px 4px;
     }
