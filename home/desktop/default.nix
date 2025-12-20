@@ -21,6 +21,7 @@ in
     wtype
     hypridle
     hyprlock
+    hyprpicker
     autorandr
     bibata-cursors
     brightnessctl

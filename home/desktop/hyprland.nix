@@ -175,7 +175,7 @@
         "$MOD, R, exec, $notes"
         "$MOD, F, exec, $termFileManager"
         "$MOD_SHIFT, F, exec, $fileManager"
-        "$MOD, G, exec, $colorPicker"
+        "$MOD, G, exec, $colorPicker -a"
 
         "$MOD, S, exec, $snap select"
         "$MOD_SHIFT, S, exec, $snap screen"
