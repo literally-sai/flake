@@ -3,7 +3,7 @@ pkgs.writeShellScriptBin "snap" ''
   #!/usr/bin/env bash
   set -euo pipefail
   MEDIA_DIR="$HOME/media"
-  PICTURES_DIR="$MEDIA_DIR/pictures"
+  PICTURES_DIR="$MEDIA_DIR/screenshots"
   VIDEOS_DIR="$MEDIA_DIR/videos"
   mkdir -p "$PICTURES_DIR" "$VIDEOS_DIR"
   case "''${1:-}" in
