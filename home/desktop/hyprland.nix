@@ -33,7 +33,6 @@
       "$toggleSound" = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
       "$setSound100" = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 100%";
       "$toggleWaybar" = "pkill -SIGUSR1 waybar";
-      "$stopRecording" = "pkill wf-recorder";
 
       env = [
         "XCURSOR_THEME,Bibata-Modern-Ice"
@@ -184,7 +183,7 @@
 
         "$MOD_SHIFT, R, exec, $snap film"
         "$MOD_CTRL, R, exec, $snap film_selection"
-        "$MOD_ALT, R, exec, $stopRecording"
+        "$MOD_ALT, R, exec, $snap stop_recording"
 
         "$MOD, H, movefocus, l"
         "$MOD, L, movefocus, r"
