@@ -64,39 +64,47 @@ let
     }
     #workspaces {
       background: ${colors.background};
-      border-radius: 16px;
-      padding: 0 12px;
-      margin: 6px 4px 6px 10px;
+      border-radius: 10px;
+      padding: 0 8px;
+      margin: 4px 4px 4px 8px;
     }
     #workspaces button {
-      padding: 0 12px;
+      padding: 0 8px;
       color: ${colors.foreground};
     }
     #workspaces button.active {
       color: ${colors.highlight};
       font-weight: 900;
     }
+    #group-middle {
+      background: ${colors.foreground};
+      border-radius: 10px;
+      padding: 0 12px;
+      margin: 4px 4px;
+    }
     #window {
-      background: ${colors.background};
-      border-radius: 16px;
-      padding: 0 20px;
-      margin: 0px 0px;
+      padding: 0 8px 0 0;
     }
-    #group-status {
-      margin: 6px 10px 6px 5px;
+    #custom-spotify,
+    #custom-discord,
+    #custom-steam,
+    #custom-recorder {
+      padding: 0 6px;
+      min-width: 20px;
     }
-    #pulseaudio.output {
-      background: ${colors.background};
-      border-radius: 16px;
-      padding: 0 16px;
+    #group-right {
+      background: ${colors.foreground};
+      border-radius: 10px;
+      padding: 0 8px;
+      margin: 4px 8px 4px 4px;
     }
-    #clock,
+    #pulseaudio,
+    #bluetooth,
     #network,
-    #bluetooth {
-      border-radius: 16px;
-      background: ${colors.background};
-      padding: 0 16px;
-      margin-left: 12px;
+    #battery,
+    #clock {
+      padding: 0 8px;
+      min-width: 20px;
     }
   '';
 

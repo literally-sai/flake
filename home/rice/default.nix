@@ -1,5 +1,5 @@
 {
   imports = [
-    ./theme-creator.nix
+    ./theme-generator.nix
   ];
 }
