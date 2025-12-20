@@ -8,7 +8,7 @@
       layer = "top";
       position = "top";
       reload_style_on_change = true;
-      height = 20;
+      height = 25;
 
       modules-left = [ "hyprland/workspaces" ];
       modules-center = [ "group/middle" ];
