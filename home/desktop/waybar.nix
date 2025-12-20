@@ -23,6 +23,7 @@
         format = "    {}";
         max-length = 22;
         separate-outputs = true;
+        on-double-click = "theme-changer next";
       };
 
       "custom/spotify" = {
@@ -70,7 +71,7 @@
 
       pulseaudio = {
         format = "{icon} {volume}%";
-        format-bluetooth = "󰥰 {volume}%";
+        format-bluetooth = "󰥰  {volume}%";
         format-bluetooth-muted = "󰝟 ";
         format-muted = "󰝟 ";
         format-icons = {
