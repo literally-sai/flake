@@ -107,13 +107,11 @@ pkgs.writeShellScriptBin "theme-changer" ''
       echo "Reloading theme-dependent components..."
       hyprctl reload >/dev/null 2>&1 || true
       pkill -SIGUSR2 waybar >/dev/null 2>&1 
-      if [[ -f "$CURRENT/wallpaper.png" ]]; then
-        awww img "$CURRENT/wallpaper.png" \
-          --transition-type wipe \
-          --transition-angle 30 \
-          --transition-step 90 \
-          --transition-duration 1.5 >/dev/null 2>&1 || true
-      fi
+      awww img "$CURRENT/wallpaper.png" \
+        --transition-type wipe \
+        --transition-angle 30 \
+        --transition-step 90 \
+        --transition-duration 1.5 >/dev/null 2>&1 || true
       pkill -SIGUSR1 kitty >/dev/null 2>&1 || true
       echo "Reload complete!"
     }
