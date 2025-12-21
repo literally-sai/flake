@@ -33,12 +33,19 @@
       nixclear = "nix-collect-garbage -d";
       nixfull = "nixreb && homereb && nixclear";
 
-      gs = "git status";
+      gst = "git status -sb";
       ga = "git add";
       gc = "git commit -m";
       gp = "git push";
 
+      ts = "tailscale";
+      tst = "tailscale status";
+      tsu = "tailscale up --ssh --operator=$USER";
+      tsd = "tailscale down";
+
       homereb = "home-manager switch --flake ~/git/flake#${hostName}";
+
+      k = "kubectl";
 
       unpack = "tar -xvf";
 
