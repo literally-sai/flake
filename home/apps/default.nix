@@ -11,6 +11,7 @@ in
 
   home.packages = with pkgs; [
     vencord
+    discord
     vesktop
     mcomix
     zathura
