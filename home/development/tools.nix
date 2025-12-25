@@ -7,5 +7,7 @@
     ntfs3g
     gdb
     valgrind
+    cmake
+    gnumake
   ];
 }
