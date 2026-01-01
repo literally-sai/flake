@@ -23,6 +23,7 @@ in
     hyprlock
     hyprpicker
     autorandr
+    imagemagick
     bibata-cursors
     brightnessctl
     dunst
