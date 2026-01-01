@@ -75,6 +75,7 @@
               modules = [
                 inputs.disko.nixosModules.disko
                 inputs.hyprland.nixosModules.default
+                inputs.sops-nix.nixosModules.sops
                 ./hosts/common
                 ./hosts/ghylak
                 ./modules
