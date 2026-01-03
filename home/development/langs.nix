@@ -5,6 +5,7 @@
     clang
     rustup
     go
+    lua
     gleam
     erlang
     nodejs_24
