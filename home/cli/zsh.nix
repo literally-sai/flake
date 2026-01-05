@@ -29,7 +29,7 @@
       nixreb = "sudo nixos-rebuild switch --flake ~/git/flake#${hostName}";
       nixtest = "sudo nixos-rebuild test --flake .";
       nixboot = "sudo nixos-rebuild boot --flake ~/git/flake#${hostName}";
-      nixupdate = "nix flake update --flake";
+      nixupdate = "nix flake update";
       nixclear = "nix-collect-garbage -d";
       nixfull = "nixreb && homereb && nixclear";
 
