@@ -4,7 +4,7 @@ let
   hostDir = if hostName == "Ghylak" then "ghylak" else "murgo";
 in
 {
-  imports = [ ./${hostDir}/hardware.nix ];
+  imports = [ ../${hostDir}/hardware.nix ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

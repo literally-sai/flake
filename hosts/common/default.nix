@@ -6,7 +6,10 @@
 }:
 
 {
-  imports = [ ./users ];
+  imports = [
+    ./users
+    ./configuration.nix
+  ];
 
   nix = {
     settings = {
