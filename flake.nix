@@ -1,5 +1,6 @@
 {
   description = "literally-sai's Flake";
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
@@ -31,6 +32,7 @@
     };
     awww.url = "git+https://codeberg.org/LGFae/awww";
   };
+
   outputs =
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -40,14 +42,17 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
+
       perSystem =
         { system, pkgs, ... }:
         {
           packages.vermvim = inputs.vermvim.packages.${system}.default;
         };
+
       flake =
         let
           baseSpecialArgs = { inherit inputs; };
+
           mkPkgs =
             system:
             import inputs.nixpkgs {
@@ -63,65 +68,63 @@
                 })
               ];
             };
+
+          commonNixosModules = [
+            inputs.disko.nixosModules.disko
+            inputs.hyprland.nixosModules.default
+            inputs.sops-nix.nixosModules.sops
+            ./hosts/common
+            ./modules
+          ];
+
+          commonHomeModules = [
+            inputs.hyprland.homeManagerModules.default
+            inputs.spicetify.homeManagerModules.default
+            ./home/home.nix
+          ];
+
+          hosts = [
+            "Ghylak"
+            "Murgo"
+          ];
+
+          mkNixos =
+            hostName:
+            inputs.nixpkgs.lib.nixosSystem {
+              system = "x86_64-linux";
+              pkgs = mkPkgs "x86_64-linux";
+              specialArgs = baseSpecialArgs // {
+                inherit hostName;
+              };
+              modules = commonNixosModules;
+            };
+
+          mkHome =
+            hostName:
+            inputs.home-manager.lib.homeManagerConfiguration {
+              pkgs = mkPkgs "x86_64-linux";
+              extraSpecialArgs = baseSpecialArgs // {
+                inherit hostName;
+                inherit (inputs) self;
+              };
+              modules = commonHomeModules;
+            };
+
         in
         {
-          nixosConfigurations = {
-            Ghylak = inputs.nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
-              pkgs = mkPkgs "x86_64-linux";
-              specialArgs = baseSpecialArgs // {
-                hostName = "Ghylak";
-              };
-              modules = [
-                inputs.disko.nixosModules.disko
-                inputs.hyprland.nixosModules.default
-                inputs.sops-nix.nixosModules.sops
-                ./hosts/common
-                ./hosts/ghylak
-                ./modules
-              ];
-            };
-            Murgo = inputs.nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
-              pkgs = mkPkgs "x86_64-linux";
-              specialArgs = baseSpecialArgs // {
-                hostName = "Murgo";
-              };
-              modules = [
-                inputs.disko.nixosModules.disko
-                inputs.hyprland.nixosModules.default
-                ./hosts/common
-                ./hosts/murgo
-                ./modules
-              ];
-            };
-          };
-          homeConfigurations = {
-            "Ghylak" = inputs.home-manager.lib.homeManagerConfiguration {
-              pkgs = mkPkgs "x86_64-linux";
-              extraSpecialArgs = baseSpecialArgs // {
-                hostName = "Ghylak";
-                inherit (inputs) self;
-              };
-              modules = [
-                inputs.hyprland.homeManagerModules.default
-                inputs.spicetify.homeManagerModules.default
-                ./home/home.nix
-              ];
-            };
-            "Murgo" = inputs.home-manager.lib.homeManagerConfiguration {
-              pkgs = mkPkgs "x86_64-linux";
-              extraSpecialArgs = baseSpecialArgs // {
-                hostName = "Murgo";
-                inherit (inputs) self;
-              };
-              modules = [
-                inputs.hyprland.homeManagerModules.default
-                inputs.spicetify.homeManagerModules.default
-                ./home/home.nix
-              ];
-            };
-          };
+          nixosConfigurations = builtins.listToAttrs (
+            map (host: {
+              name = host;
+              value = mkNixos host;
+            }) hosts
+          );
+
+          homeConfigurations = builtins.listToAttrs (
+            map (host: {
+              name = host;
+              value = mkHome host;
+            }) hosts
+          );
         };
     };
 }
