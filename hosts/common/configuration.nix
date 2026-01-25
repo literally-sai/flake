@@ -1,4 +1,4 @@
-{ hostName, ... }:
+{ hostName, pkgs, ... }:
 
 let
   hostDir = if hostName == "Ghylak" then "ghylak" else "murgo";
@@ -37,6 +37,15 @@ in
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+  };
+
+  hardware.enableRedistributableFirmware = true;
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      mesa
+      vulkan-tools
+    ];
   };
 
   system.stateVersion = "25.11";
