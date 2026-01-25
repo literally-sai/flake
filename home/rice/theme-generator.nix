@@ -9,13 +9,14 @@ let
   dandy = import ./themes/dandy.nix;
   cold = import ./themes/cold.nix;
   fennek = import ./themes/fennek.nix;
-
+  marathon = import ./themes/marathon.nix;
   themes = {
     inherit
       rose
       dandy
       cold
       fennek
+      marathon
       ;
   };
 
