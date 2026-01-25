@@ -1,10 +1,10 @@
 { pkgs, ... }:
+
 {
   home.packages = with pkgs; [
     alsa-lib
     vulkan-loader
     vulkan-tools
-    systemd.lib
     xorg.libX11
     xorg.libXcursor
     xorg.libXi
