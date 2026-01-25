@@ -29,5 +29,6 @@ in
     grim
     bibata-cursors
     localsend
+    vlc
   ];
 }
