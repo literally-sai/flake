@@ -9,7 +9,5 @@
     gleam
     erlang
     nodejs_24
-    premake5
-    protobuf
   ];
 }

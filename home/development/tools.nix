@@ -10,5 +10,9 @@
     valgrind
     cmake
     gnumake
+    bacon
+    premake5
+    protobuf
+    pkg-config
   ];
 }
