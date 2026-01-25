@@ -4,7 +4,7 @@
 
   home.packages = with pkgs; [
     black
-    nixfmt-rfc-style
+    nixfmt
     prettierd
     shfmt
     stylua
