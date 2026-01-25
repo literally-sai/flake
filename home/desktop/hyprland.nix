@@ -280,7 +280,6 @@
 
       windowrule = [
         "opacity 0.85 0.85, match:title .*pdf.*"
-        "opacity 0.95 0.95, match:class kitty"
         "opacity 1.0 1.0, match:class firefox"
         "opacity 0.78 0.78, match:class Spotify"
         "opacity 0.88 0.88, match:title .*Vesktop*."
