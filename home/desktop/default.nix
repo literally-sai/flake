@@ -11,7 +11,6 @@ in
   imports = imports;
 
   home.packages = with pkgs; [
-    imwheel
     grim
     slurp
     waypipe
