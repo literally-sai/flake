@@ -125,7 +125,8 @@
 
       clock = {
         format = "{:%H:%M}";
-        tooltip = false;
+        tooltip = true;
+        tooltip-format = "<big>{:%d-%m-%Y}</big>";
       };
 
       "group/right" = {
