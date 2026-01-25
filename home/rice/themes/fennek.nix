@@ -1,52 +1,53 @@
 {
   kitty = {
-    background = "#000000";
+    background = "#292824";
     background_opacity = "0.9";
-    foreground = "#ffffff";
-    cursor = "#fa7883";
-    selection_background = "#585858";
-    color0 = "#000000";
-    color8 = "#888888";
-    color1 = "#fa7883";
-    color9 = "#ffc387";
-    color2 = "#98c379";
-    color10 = "#282828";
-    color3 = "#ff9470";
-    color11 = "#585858";
-    color4 = "#6bb8ff";
-    color12 = "#c8c8c8";
-    color5 = "#e799ff";
-    color13 = "#ffffff";
-    color6 = "#8af5ff";
-    color14 = "#b3684f";
-    color7 = "#ffffff";
-    color15 = "#ffffff";
-    selection_foreground = "#ffffff";
-    active_tab_foreground = "#ffffff";
-    active_tab_background = "#e799ff";
-    inactive_tab_foreground = "#ffffff";
-    inactive_tab_background = "#585858";
+    foreground = "#e8e4cf";
+    cursor = "#fefbec";
+    selection_background = "#7d7a68";
+    color0 = "#292824";
+    color8 = "#999580";
+    color1 = "#d73737";
+    color9 = "#b65611";
+    color2 = "#1fad83";
+    color10 = "#60ac39";
+    color3 = "#ae9513";
+    color11 = "#7d7a68";
+    color4 = "#6684e1";
+    color12 = "#b854d4";
+    color5 = "#d43552";
+    color13 = "#ae9513";
+    color6 = "#1fad83";
+    color14 = "#fefbec";
+    color7 = "#e8e4cf";
+    color15 = "#d73737";
+    selection_foreground = "#e8e4cf";
+    active_tab_foreground = "#e8e4cf";
+    active_tab_background = "#6684e1";
+    inactive_tab_foreground = "#e8e4cf";
+    inactive_tab_background = "#7d7a68";
   };
+
   waybar = {
-    background = "rgba(0, 0, 0, 0.75)";
-    foreground = "#ffffff";
-    highlight = "#6bb8ff";
+    background = "rgba(41, 40, 36, 0.9)";
+    foreground = "#e8e4cf";
+    highlight = "#6684e1";
   };
 
   borders = {
-    active0 = "6bb8ffFF";
-    active1 = "fa7883FF";
-    inactive0 = "585858FF";
-    inactive1 = "282828FF";
+    active0 = "6684e1FF";
+    active1 = "d73737FF";
+    inactive0 = "7d7a68FF";
+    inactive1 = "6e6b5eFF";
   };
 
   rofi = {
-    background0 = "rgba(0, 0, 0, 0.6)";
-    background1 = "#28282880";
-    foreground = "#ffffff";
-    selected = "#6bb8ff";
-    active = "#98c379";
-    urgent = "#fa7883";
+    background0 = "rgba(41, 40, 36, 0.9)";
+    background1 = "#6e6b5eE6";
+    foreground = "#e8e4cf";
+    selected = "#fefbec";
+    active = "#60ac39";
+    urgent = "#d73737";
   };
 
   images = [
