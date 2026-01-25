@@ -70,19 +70,20 @@
     };
 
     initContent = ''
-      bindkey "^[[1;5C" forward-word
-      bindkey "^[[1;5D" backward-word
-      export EDITOR="nvim"
-      export BROWSER="firefox"
-      export TERMINAL="kitty"
+            bindkey "^[[1;5C" forward-word
+            bindkey "^[[1;5D" backward-word
+            export EDITOR="nvim"
+            export BROWSER="firefox"
+            export TERMINAL="kitty"
+      			export PATH="$HOME/.cargo/bin:$PATH"
 
-      function devshell() {
-          if [ -z "$1" ]; then
-              echo "Usage: devshell <shell-name>"
-              return 1
-          fi
-          nix develop ~/git/flake/devShells/$1
-      }
+            function devshell() {
+                if [ -z "$1" ]; then
+                    echo "Usage: devshell <shell-name>"
+                    return 1
+                fi
+                nix develop ~/git/flake/devShells/$1
+            }
     '';
   };
 }
