@@ -38,6 +38,33 @@
         "XCURSOR_THEME,Bibata-Modern-Ice"
         "XCURSOR_SIZE,20"
         "XDG_MENU_PREFIX,plasma-"
+        "LD_LIBRARY_PATH,${
+          pkgs.lib.makeLibraryPath [
+            pkgs.vulkan-loader
+            pkgs.xorg.libX11
+            pkgs.xorg.libXcursor
+            pkgs.xorg.libXi
+            pkgs.xorg.libXrandr
+            pkgs.libxkbcommon
+            pkgs.wayland
+            pkgs.libGL
+            pkgs.alsa-lib
+          ]
+        }"
+        "RUST_SRC_PATH,${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}"
+        "PKG_CONFIG_PATH,${
+          pkgs.lib.makeSearchPathOutput "dev" "lib/pkgconfig" [
+            pkgs.wayland
+            pkgs.libxkbcommon
+            pkgs.alsa-lib
+            pkgs.libudev-zero
+            pkgs.vulkan-loader
+            pkgs.xorg.libX11
+            pkgs.xorg.libXcursor
+            pkgs.xorg.libXi
+            pkgs.xorg.libXrandr
+          ]
+        }"
       ];
 
       animations = {
