@@ -9,5 +9,6 @@
     gleam
     erlang
     nodejs_24
+    python315
   ];
 }
