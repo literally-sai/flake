@@ -151,9 +151,9 @@
       monitor =
         if hostName == "Ghylak" then
           [
-            "DP-2,1920x1080@60,0x180,1"
+            "HDMI-A-1,1920x1080@60,0x180,1"
             "DP-3,2560x1440@60,1920x0,1.33"
-            ",preferred,auto,1"
+            ",preferred,auto,2"
           ]
         else if hostName == "Murgo" then
           [
