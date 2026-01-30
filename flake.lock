@@ -868,11 +868,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1768985542,
-        "narHash": "sha256-4z7dlKKhk91DnQGL0yPzHj4XQ4EY5xOU8TmhWoXUD3M=",
+        "lastModified": 1769439970,
+        "narHash": "sha256-7cyN6g22Ftw3PImTYAJO6dga4wpnkEj3PCwpYvIpc+I=",
         "owner": "literally-sai",
         "repo": "vermvim",
-        "rev": "7bcf7f96ccb634a22aa694011cc3e57cec14696c",
+        "rev": "d92a21d9a8e2319a5cac34b9737f6debd574635f",
         "type": "github"
       },
       "original": {
