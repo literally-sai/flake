@@ -12,6 +12,7 @@
     libxkbcommon
     wayland
     libGL
+    openssl.dev
   ];
 
   home.sessionVariables = {
@@ -25,6 +26,7 @@
       pkgs.libxkbcommon
       pkgs.wayland
       pkgs.libGL
+      pkgs.openssl
     ];
   };
 }

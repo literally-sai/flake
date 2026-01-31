@@ -57,6 +57,7 @@
             pkgs.wayland
             pkgs.libxkbcommon
             pkgs.alsa-lib
+            pkgs.openssl.dev
             pkgs.libudev-zero
             pkgs.vulkan-loader
             pkgs.xorg.libX11
