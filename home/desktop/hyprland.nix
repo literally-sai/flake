@@ -41,10 +41,10 @@
         "LD_LIBRARY_PATH,${
           pkgs.lib.makeLibraryPath [
             pkgs.vulkan-loader
-            pkgs.xorg.libX11
-            pkgs.xorg.libXcursor
-            pkgs.xorg.libXi
-            pkgs.xorg.libXrandr
+            pkgs.libX11
+            pkgs.libXcursor
+            pkgs.libXi
+            pkgs.libXrandr
             pkgs.libxkbcommon
             pkgs.wayland
             pkgs.libGL
@@ -60,10 +60,10 @@
             pkgs.openssl.dev
             pkgs.libudev-zero
             pkgs.vulkan-loader
-            pkgs.xorg.libX11
-            pkgs.xorg.libXcursor
-            pkgs.xorg.libXi
-            pkgs.xorg.libXrandr
+            pkgs.libX11
+            pkgs.libXcursor
+            pkgs.libXi
+            pkgs.libXrandr
           ]
         }"
       ];
