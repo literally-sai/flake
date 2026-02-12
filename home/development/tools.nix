@@ -10,8 +10,8 @@
     valgrind
     cmake
     gnumake
-    bacon
     premake5
+    postgresql
     protobuf
     pkg-config
   ];
