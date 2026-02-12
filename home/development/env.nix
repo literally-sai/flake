@@ -5,10 +5,10 @@
     alsa-lib
     vulkan-loader
     vulkan-tools
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libXi
-    xorg.libXrandr
+    libX11
+    libXcursor
+    libXi
+    libXrandr
     libxkbcommon
     wayland
     libGL
@@ -19,10 +19,10 @@
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
     LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
       pkgs.vulkan-loader
-      pkgs.xorg.libX11
-      pkgs.xorg.libXcursor
-      pkgs.xorg.libXi
-      pkgs.xorg.libXrandr
+      pkgs.libX11
+      pkgs.libXcursor
+      pkgs.libXi
+      pkgs.libXrandr
       pkgs.libxkbcommon
       pkgs.wayland
       pkgs.libGL
