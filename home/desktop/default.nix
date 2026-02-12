@@ -12,6 +12,7 @@ in
 
   home.packages = with pkgs; [
     grim
+    ppsspp-sdl-wayland
     slurp
     waypipe
     wf-recorder
