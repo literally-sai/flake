@@ -13,10 +13,6 @@ in
 
   services = {
     pipewire.wireplumber.enable = true;
-    xserver.xkb = {
-      layout = "us";
-      variant = "";
-    };
   };
 
   time.timeZone = "Europe/Berlin";
