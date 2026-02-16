@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 
 {
   virtualisation.libvirtd = {
@@ -11,19 +11,30 @@
 
   virtualisation.docker = {
     enable = true;
+
     rootless = {
       enable = true;
       setSocketVariable = true;
     };
+
     autoPrune = {
       enable = true;
       dates = "weekly";
     };
+
     daemon.settings = {
+      dns = [
+        "1.1.1.1"
+        "1.0.0.1"
+        "8.8.8.8"
+        "8.8.4.4"
+      ];
+
       ipv6 = true;
       live-restore = true;
       experimental = true;
     };
+
   };
 
   environment.systemPackages = with pkgs; [
