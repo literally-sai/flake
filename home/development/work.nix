@@ -5,6 +5,7 @@
     slack
     zoom-us
     awscli2
+    doctl
     ssm-session-manager-plugin
     aws-vault
     bash
