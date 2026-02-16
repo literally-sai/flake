@@ -9,6 +9,7 @@
         53317
       ];
       allowedUDPPorts = [ 53317 ];
+      trustedInterfaces = [ "docker0" ];
     };
 
     useDHCP = false;
