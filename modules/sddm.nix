@@ -52,11 +52,6 @@ in
         })
       ];
     };
-
-    xserver = {
-      enable = true;
-      xkb.layout = "us";
-    };
   };
 
   environment.systemPackages = with pkgs; [
