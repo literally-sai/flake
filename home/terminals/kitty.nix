@@ -14,7 +14,7 @@
     };
 
     settings = {
-      copy_on_select = true;
+      copy_on_select = "yes";
       cursorShape = "beam";
       cursorBlink = "on";
       cursor_blink_interval = "1.3 ease-in-out";
