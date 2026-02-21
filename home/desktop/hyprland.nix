@@ -42,7 +42,7 @@
           pkgs.lib.makeLibraryPath [
             pkgs.vulkan-loader
             pkgs.libX11
-            pkgs.libXcursor
+            pkgs.libxcursor
             pkgs.libXi
             pkgs.libXrandr
             pkgs.libxkbcommon
