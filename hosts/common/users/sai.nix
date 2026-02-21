@@ -11,6 +11,7 @@
     description = "Literally Sai";
     extraGroups = [
       "wheel"
+      "render"
       "docker"
       "networkmanager"
       "audio"
