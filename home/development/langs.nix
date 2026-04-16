@@ -9,7 +9,7 @@
     gleam
     erlang
     nodejs_24
-    python313
-    python313.pkgs.pip
+    python314
+    python314.pkgs.pip
   ];
 }

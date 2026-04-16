@@ -18,6 +18,7 @@ in
     wf-recorder
     wl-mirror
     wl-clipboard
+    ffmpeg_7-full
     wtype
     hypridle
     hyprlock
@@ -31,5 +32,6 @@ in
     bibata-cursors
     localsend
     vlc
+    bambu-studio
   ];
 }

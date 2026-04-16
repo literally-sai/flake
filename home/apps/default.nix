@@ -15,7 +15,7 @@ in
     vesktop
     mcomix
     zathura
-    blender
+    (blender.withPackages (ps: [ ps.py-slvs ]))
     obs-studio
     pavucontrol
     obsidian
