@@ -2,6 +2,7 @@
 
 let
   hostDir = if hostName == "Ghylak" then "ghylak" else "murgo";
+	zfsHostId = if hostName == "Ghylak" then "deadc0de" else "ea7bee5";
 in
 {
   imports = [ ../${hostDir}/hardware.nix ];
@@ -9,6 +10,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   networking.hostName = "${hostName}";
+	networking.hostId = "${zfsHostId}";
   networking.networkmanager.enable = true;
 
   services = {

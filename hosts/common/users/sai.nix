@@ -6,7 +6,7 @@
 
 {
   users.users.sai = {
-    initialHashedPassword = "$y$j9T$GVELLSbxwJRxvZzwVemgk/$bKqeK9EdOohyI7oViTvVcdcj2XERlIU8q5KVd7pi2S2";
+    initialHashedPassword = "$y$j9T$9B6fOy9l/7mohqmyGI3uA.$3DwseJoMJIHP6vze5HpS/PsEY2UuLiaI6j/SRp0lgJ8";
     isNormalUser = true;
     description = "Literally Sai";
     extraGroups = [
