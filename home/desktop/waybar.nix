@@ -1,0 +1,147 @@
+{ hostName, lib, ... }:
+
+{
+  programs.waybar = {
+    enable = true;
+    style = null;
+    settings.bar = {
+      layer = "top";
+      position = "top";
+      reload_style_on_change = true;
+      height = 25;
+
+      modules-left = [ "sway/workspaces" ];
+      modules-center = [ "group/middle" ];
+      modules-right = [ "group/right" ];
+
+      "sway/workspaces" = {
+        format = "{name}";
+        on-click = "activate";
+      };
+
+      "sway/window" = {
+        format = "    {}";
+        max-length = 22;
+        separate-outputs = true;
+        on-double-click = "theme-changer next";
+      };
+
+      "custom/spotify" = {
+        format = "";
+        tooltip = false;
+        interval = 5;
+        exec = "echo ";
+        exec-if = "pgrep spotify";
+      };
+
+      "custom/discord" = {
+        format = "";
+        tooltip = false;
+        interval = 5;
+        exec = "echo ";
+        exec-if = "pgrep -f vesktop";
+      };
+
+      "custom/steam" = {
+        format = "";
+        tooltip = false;
+        interval = 5;
+        exec = "echo ";
+        exec-if = "pgrep steam";
+      };
+
+      "custom/recorder" = {
+        format = "";
+        tooltip = false;
+        interval = 5;
+        exec = "echo ";
+        exec-if = "pgrep wf-recorder";
+      };
+
+      "group/middle" = {
+        orientation = "horizontal";
+        modules = [
+          "sway/window"
+          "custom/spotify"
+          "custom/discord"
+          "custom/steam"
+          "custom/recorder"
+        ];
+      };
+
+      pulseaudio = {
+        format = "{icon} {volume}%";
+        format-bluetooth = "󰥰  {volume}%";
+        format-bluetooth-muted = "󰝟 ";
+        format-muted = "󰝟 ";
+        format-icons = {
+          default = [
+            "󰕿 "
+            "󰖀 "
+            "󰕾 "
+          ];
+          headphone = "󰋋 ";
+        };
+      };
+
+      bluetooth = {
+        format = "󰂯";
+        format-disabled = "󰂲";
+        format-connected = "󰂱";
+        format-connected-battery = "󰂱";
+      };
+
+      network = {
+        format = "{icon} ";
+        format-icons = [
+          "󰤯"
+          "󰤟"
+          "󰤢"
+          "󰤥"
+          "󰤨"
+        ];
+        format-linked = "󰤩 ";
+        tooltip = false;
+        format-ethernet = "󰈀 ";
+        format-disconnected = "󰤮 ";
+      };
+
+      battery = {
+        states = {
+          warning = 20;
+          critical = 10;
+        };
+        format = "{icon} ";
+        format-charging = " ";
+        format-full = " ";
+        format-icons = [
+          ""
+          ""
+          ""
+          ""
+          ""
+        ];
+      };
+
+      clock = {
+        format = "{:%H:%M}";
+        tooltip = true;
+        tooltip-format = "<big>{:%d-%m-%Y}</big>";
+      };
+
+      "group/right" = {
+        orientation = "horizontal";
+        modules = [
+          "pulseaudio"
+          "bluetooth"
+          "network"
+        ]
+        ++ lib.optional (hostName == "Murgo") "battery"
+        ++ [
+          "clock"
+        ];
+      };
+
+    };
+  };
+}

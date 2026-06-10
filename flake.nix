@@ -1,99 +1,90 @@
 {
-	description = "My personal NixFlake";
+  description = "My personal NixFlake";
 
-	inputs = {
-		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-		home-manager = {
-			url = "github:nix-community/home-manager";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
-		disko = {
-			url = "github:nix-community/disko";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
-		spicetify = {
-			url = "github:Gerg-L/spicetify-nix";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
-		nur.url = "github:nix-community/NUR";
-		flake-parts.url = "github:hercules-ci/flake-parts";
-		vermvim = {
-			url = "github:literally-sai/vermvim";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
-		awww.url = "git+https://codeberg.org/LGFae/awww";
-	};
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    spicetify = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nur.url = "github:nix-community/NUR";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    vermvim = {
+      url = "github:literally-sai/vermvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    awww.url = "git+https://codeberg.org/LGFae/awww";
+  };
 
-	outputs =
-		inputs@{ flake-parts, ...}
-			flake-parts.lib.mkFlake { inherit inputs; } {
-				systems = [
-					"x86_64-linux"
-					"aarch64-linux"
-					"x86_64-darwin"
-					"aarch64-darwin"
-				];
+  outputs = inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
 
-			perSystem = { system, pkgs, ...}:
-			{
-					packages.vermvim = inputs.vermvim.packages.${system}.default;
-			};
+      perSystem = { system, pkgs, ... }: {
+        packages.vermvim = inputs.vermvim.packages.${system}.default;
+      };
 
-			flake =
-				let baseSpecialArgs = { inherit inputs; };
-				
-				mkPkgs =
-					system:
-					import inputs.nixpkgs {
-						inherit system;
-						config.allowUnfree = true;
-						overlays = [
-							(final: prev: {
-								nur = import inputs.nur {
-									pkgs = final;
-									nurpkgs = final;
-								};
-							})
-						];
-				};
+      flake =
+        let 
+          baseSpecialArgs = { inherit inputs; };
+          
+          mkPkgs = system: import inputs.nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+            overlays = [
+              (final: prev: {
+                nur = import inputs.nur {
+                  pkgs = final;
+                  nurpkgs = final;
+                };
+              })
+            ];
+          };
 
-				commonNixosModules = [
-					inputs.disko.nixosModules.disko
-					./hosts/common
-					./modules
-				];
+          commonNixosModules = [
+            inputs.disko.nixosModules.disko
+            ./hosts/common
+            ./modules
+          ];
 
-				commonHomeModules = [
-					inputs.spicetify.homeManagerModules.default
-					./home/home.nix
-				];
+          commonHomeModules = [
+            inputs.spicetify.homeManagerModules.default
+            ./home/home.nix
+          ];
 
-				hosts = [
-					"Ghylak"
-					"Murgo"
-				];
+          hosts = [
+            "Ghylak"
+            "Murgo"
+          ];
 
-				mkNixos =
-					hostName:
-						inputs.nixpkgs.lib.nixosSystem {
-							system = "x86_64-linux";
-							pkgs = mkPkgs "x86_64-linux";
-							specialArgs = baseSpecialArgs // {
-								inherit hostName;
-							};
-							modules = commonNixosModules;
-					};
+          mkNixos = hostName: inputs.nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            pkgs = mkPkgs "x86_64-linux";
+            specialArgs = baseSpecialArgs // { inherit hostName; };
+            modules = commonNixosModules ++ [ (./hosts + "/${hostName}") ]; 
+          };
 
-				mkHome =
-            hostName:
-            inputs.home-manager.lib.homeManagerConfiguration {
-              pkgs = mkPkgs "x86_64-linux";
-              extraSpecialArgs = baseSpecialArgs // {
-                inherit hostName;
-                inherit (inputs) self;
-              };
-              modules = commonHomeModules;
+          mkHome = hostName: inputs.home-manager.lib.homeManagerConfiguration {
+            pkgs = mkPkgs "x86_64-linux";
+            extraSpecialArgs = baseSpecialArgs // {
+              inherit hostName;
+              inherit (inputs) self;
             };
+            modules = commonHomeModules;
+          };
 
         in
         {
