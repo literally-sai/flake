@@ -30,9 +30,9 @@ in
     LC_TIME = "de_DE.UTF-8";
   };
 
-  programs.hyprland = {
+  programs.sway = {
     enable = true;
-    xwayland.enable = true;
+    wrapperFeatures.gtk = true;
   };
 
   hardware.enableRedistributableFirmware = true;
@@ -44,5 +44,5 @@ in
     ];
   };
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 }

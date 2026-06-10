@@ -6,7 +6,7 @@
 
 {
   users.users.sai = {
-    initialHashedPassword = "$y$j9T$UUQb1d7dnvcgDOBRxll9P0$9YKlpeQa4lF///MfU2Awe1ttn3yxPsCtOVu219a42p8";
+    initialHashedPassword = "$y$j9T$GVELLSbxwJRxvZzwVemgk/$bKqeK9EdOohyI7oViTvVcdcj2XERlIU8q5KVd7pi2S2";
     isNormalUser = true;
     description = "Literally Sai";
     extraGroups = [
@@ -21,8 +21,10 @@
       "kvm"
       "libvirtd"
       "qemu-libvirtd"
+			"dialout"
+			"storage"
+			"wireshark"
     ];
-    openssh.authorizedKeys.keys = [ ];
     packages = [ inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default ];
   };
 }

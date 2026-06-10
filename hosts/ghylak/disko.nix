@@ -4,8 +4,7 @@
       nvme0n1 = {
         type = "disk";
         content = {
-          type = "table";
-          format = "gpt";
+          type = "gpt";
           partitions = {
             boot = {
               size = "1G";
@@ -23,13 +22,29 @@
             root = {
               size = "100%";
               content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/";
+                type = "luks";
+                name = "crypted";
+                settings = {
+                  allowDiscards = true;
+                };
+                content = {
+                  type = "zfs";
+                  pool = "zroot";
+                };
               };
             };
           };
         };
+      };
+    };
+    zpool = {
+      zroot = {
+        type = "zpool";
+        rootFsOptions = {
+          compression = "zstd";
+          "com.sun:auto-snapshot" = "false";
+        };
+        mountpoint = "/";
       };
     };
   };
