@@ -46,7 +46,7 @@
 
       homereb = "home-manager switch --flake ~/git/flake#${hostName}";
 
-      k = "kubectl";
+      kubl = "kubectl";
 
       unpack = "tar -xvf";
 
@@ -69,7 +69,7 @@
       theme = "agnoster";
     };
 
-    initContent = ''
+    initExtra = ''
             bindkey "^[[1;5C" forward-word
             bindkey "^[[1;5D" backward-word
             export EDITOR="nvim"
@@ -82,7 +82,7 @@
                     echo "Usage: devshell <shell-name>"
                     return 1
                 fi
-                nix develop ~/git/flake/devShells/$1
+                nix develop ~/git/flake/shells/$1/
             }
     '';
   };

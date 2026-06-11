@@ -4,7 +4,7 @@
   ...
 }:
 let
-  fastfetch_image = "${config.home.homeDirectory}/.config/rice/current/fastfetch_image.png";
+  fastfetch_img = "${config.home.homeDirectory}/.config/rice/current/fastfetch_img.png";
 in
 {
   home.packages = with pkgs; [ fastfetch ];
@@ -14,7 +14,7 @@ in
     settings = {
       logo = {
         type = "kitty-direct";
-        source = fastfetch_image;
+        source = fastfetch_img;
         width = 38;
         padding = {
           right = 3;
@@ -30,7 +30,6 @@ in
       modules = [
         "break"
 
-        # ─────────────────────────── Hardware ───────────────────────────
         {
           type = "custom";
           format = "╭─── Hardware ───────────────────────────────────────────────╮";

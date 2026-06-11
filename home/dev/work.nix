@@ -1,30 +1,29 @@
 { pkgs, ... }:
 
 {
-	home.packages = with pkgs; [
-		bash
-		awscli2
-		aws-vault
-		ssm-session-manager-plugin
+  home.packages = with pkgs; [
+    bash
+    awscli2
+    aws-vault
+    ssm-session-manager-plugin
 
-
-		udev.dev
+    udev.dev
     ntfs3g
     postgresql
     protobuf
     pkg-config
 
-		clang
-		rustup
-		bpftools
-		llvmPackages.bintools
-		libbpf
-		cargo-binstall
-		python3
-		gdb
+    clang
+    rustup
+    bpftools
+    libbpf
+    cargo-binstall
+    python3
+    gdb
     valgrind
     cmake
     gnumake
     premake5
-	];
+    nodejs_24
+  ];
 }

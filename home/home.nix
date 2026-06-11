@@ -12,7 +12,7 @@
     ./cli
     ./desktop
     ./terminals
-    ./development
+    ./dev
     ./rice
     ./scripts
   ];
