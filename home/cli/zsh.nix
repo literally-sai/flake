@@ -69,7 +69,7 @@
       theme = "agnoster";
     };
 
-    initExtra = ''
+    initContent = ''
             bindkey "^[[1;5C" forward-word
             bindkey "^[[1;5D" backward-word
             export EDITOR="nvim"

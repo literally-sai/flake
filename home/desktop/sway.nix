@@ -26,6 +26,7 @@
         menu = "${pkgs.rofi}/bin/rofi -show drun";
 
         startup = [
+          { command = "pkill awww-daemon"; }
           { command = "exec awww-daemon"; }
           { command = "exec theme-changer init"; }
           { command = "waybar"; }
@@ -38,6 +39,7 @@
 
         window = {
           border = 2;
+          titlebar = false;
           commands = [
             {
               criteria = {
