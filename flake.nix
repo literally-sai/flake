@@ -74,7 +74,7 @@
             system = "x86_64-linux";
             pkgs = mkPkgs "x86_64-linux";
             specialArgs = baseSpecialArgs // { inherit hostName; };
-            modules = commonNixosModules]; 
+            modules = commonNixosModules; 
           };
 
           mkHome = hostName: inputs.home-manager.lib.homeManagerConfiguration {
