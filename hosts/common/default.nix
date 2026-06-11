@@ -9,7 +9,7 @@
   imports = [
     ./users
     ./configuration.nix
-		./disko.nix
+    ./disko.nix
   ];
 
   nix = {

@@ -21,9 +21,9 @@
       "kvm"
       "libvirtd"
       "qemu-libvirtd"
-			"dialout"
-			"storage"
-			"wireshark"
+      "dialout"
+      "storage"
+      "wireshark"
     ];
     packages = [ inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default ];
   };

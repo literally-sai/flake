@@ -66,15 +66,15 @@
           ];
 
           hosts = [
-            "Ghylak"
-            "Murgo"
+            "ghylak"
+            "murgo"
           ];
 
           mkNixos = hostName: inputs.nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             pkgs = mkPkgs "x86_64-linux";
             specialArgs = baseSpecialArgs // { inherit hostName; };
-            modules = commonNixosModules ++ [ (./hosts + "/${hostName}") ]; 
+            modules = commonNixosModules]; 
           };
 
           mkHome = hostName: inputs.home-manager.lib.homeManagerConfiguration {
