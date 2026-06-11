@@ -6,6 +6,7 @@ pkgs.writeShellScriptBin "snap" ''
   PICTURES_DIR="$MEDIA_DIR/screenshots"
   VIDEOS_DIR="$MEDIA_DIR/videos"
   mkdir -p "$PICTURES_DIR" "$VIDEOS_DIR"
+
   case "''${1:-}" in
     screen|all|select|film|film_selection|stop_recording)
       ;;
@@ -23,11 +24,12 @@ pkgs.writeShellScriptBin "snap" ''
       exit 1
       ;;
   esac
+
   case "$1" in
     screen)
       FILENAME="$PICTURES_DIR/$(date +'%d-%m-%Y_%H%M%S').png"
       grim -g "$(
-        hyprctl monitors -j | jq -r '.[] | select(.focused == true) | "\(.x),\(.y) \(.width)x\(.height)"'
+        swaymsg -t get_outputs -raw | jq -r '.[] | select(.focused) | .rect | "\(.x),\(.y) \(.width)x\(.height)"'
       )" "$FILENAME"
       wl-copy < "$FILENAME"
       dunstify -i "$FILENAME" "Screenshot taken" "$(basename "$FILENAME")" -t 3000 -a "snap"
@@ -51,7 +53,7 @@ pkgs.writeShellScriptBin "snap" ''
     film)
       FILENAME="$VIDEOS_DIR/$(date +'%d-%m-%Y_%H%M%S').mp4"
       wf-recorder --audio="$(wpctl inspect @DEFAULT_AUDIO_SINK@ | awk '/node.name = / {gsub(/"/, "", $3); print $3 ".monitor"}')" -f "$FILENAME" -g "$(
-        hyprctl monitors -j | jq -r '.[] | select(.focused == true) | "\(.x),\(.y) \(.width)x\(.height)"'
+        swaymsg -t get_outputs -raw | jq -r '.[] | select(.focused) | .rect | "\(.x),\(.y) \(.width)x\(.height)"'
       )"
       dunstify "Recording saved" "$(basename "$FILENAME")" -t 3000 -a "snap"
       echo "$FILENAME"

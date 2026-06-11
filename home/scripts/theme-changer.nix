@@ -15,9 +15,8 @@ pkgs.writeShellScriptBin "theme-changer" ''
     file_map[rofi]="rofi.rasi"
     file_map[kitty]="kitty.conf"
     file_map[waybar]="waybar.css"
-    file_map[border]="border.conf"
 
-    all_components=(wallpaper lockpaper fastfetch_image rofi-img rofi kitty waybar border)
+    all_components=(wallpaper lockpaper fastfetch_image rofi-img rofi kitty waybar)
 
     list_themes() {
       find "$RICE_DIR" -mindepth 1 -maxdepth 1 -type d ! -name current -printf '%f\n' | sort
@@ -102,15 +101,12 @@ pkgs.writeShellScriptBin "theme-changer" ''
         kitty)
           pkill -SIGUSR1 kitty >/dev/null 2>&1 || true
           ;;
-        border)
-          hyprctl reload >/dev/null 2>&1 || true
-          awww img "$CURRENT/wallpaper.png" \
+        *)
+		      awww img "$CURRENT/wallpaper.png" \
             --transition-type wipe \
             --transition-angle 30 \
             --transition-step 90 \
             --transition-duration 1.5 >/dev/null 2>&1 || true
-          ;;
-        *)
           ;;
       esac
     }
@@ -214,7 +210,7 @@ pkgs.writeShellScriptBin "theme-changer" ''
         echo "Available themes:"
         list_themes | sed 's/^/ /'
         ;;
-      wallpaper|lockpaper|fastfetch_image|rofi-img|rofi|kitty|waybar|border)
+      wallpaper|lockpaper|fastfetch_image|rofi-img|rofi|kitty|waybar)
         if [[ -z "''${2:-}" ]]; then
           show_usage
         fi
