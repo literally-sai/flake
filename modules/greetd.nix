@@ -5,13 +5,13 @@
     enable = true;
     settings = {
       default_session = {
+        user = "sai";
         command = "${pkgs.sway}/bin/sway --config ${pkgs.writeText "greetd-sway-config" ''
           xwayland disable
           output * bg #1a1c23 solid_color
           # FIXED: Swapped 'pkgs.greetd.regreet' out for the modernized 'pkgs.regreet'
           exec "${pkgs.regreet}/bin/regreet; swaymsg exit"
         ''}";
-        user = "greeter";
       };
     };
   };

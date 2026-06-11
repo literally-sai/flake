@@ -9,11 +9,16 @@
     };
   };
 
-  outputs = { self, nixpkgs, fenix }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      fenix,
+    }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      
+
       rustToolchain = fenix.packages.${system}.fromToolchainFile {
         file = ./rust-toolchain.toml;
         sha256 = "sha256-R3POfbXvE2Y9iN8v2+f80eTszmGfE6i7P97A+WunvIs=";
@@ -26,8 +31,6 @@
           clang
           llvmPackages.bintools
           bpftools
-          cargo-generate
-          bpf-linker
         ];
 
         buildInputs = with pkgs; [
@@ -47,6 +50,9 @@
           export SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
 
           export BPF_CLANG_FLAGS="-I ${pkgs.linuxHeaders}/include"
+
+          cargo-binstall bpf-linker
+          cargo install cargo-generate
 
         '';
       };

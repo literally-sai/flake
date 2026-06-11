@@ -26,7 +26,6 @@
         menu = "${pkgs.rofi}/bin/rofi -show drun";
 
         startup = [
-          { command = "pkill awww-daemon"; }
           { command = "exec awww-daemon"; }
           { command = "exec theme-changer init"; }
           { command = "waybar"; }
@@ -41,12 +40,6 @@
           border = 2;
           titlebar = false;
           commands = [
-            {
-              criteria = {
-                title = ".*pdf.*";
-              };
-              command = "opacity 0.85";
-            }
             {
               criteria = {
                 class = "firefox";
