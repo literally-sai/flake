@@ -51,6 +51,9 @@
 
           export BPF_CLANG_FLAGS="-I ${pkgs.linuxHeaders}/include"
 
+          export CFLAGS="-fno-zero-call-used-regs=used-gpr -fno-stack-protector"
+          export BPF_CLANG_FLAGS="-I ${pkgs.linuxHeaders}/include $CFLAGS"
+
           cargo-binstall bpf-linker
           cargo install cargo-generate
 
