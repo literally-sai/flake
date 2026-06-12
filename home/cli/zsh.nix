@@ -44,7 +44,7 @@
       tsu = "tailscale up --ssh --operator=$USER";
       tsd = "tailscale down";
 
-      homereb = "home-manager switch --flake ~/git/flake#${hostName} && pkill awww-daemon";
+      homereb = "home-manager switch --flake ~/git/flake#${hostName}";
 
       kubl = "kubectl";
 

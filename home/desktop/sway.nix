@@ -26,8 +26,8 @@
         menu = "${pkgs.rofi}/bin/rofi -show drun";
 
         startup = [
-          { command = "exec awww-daemon"; }
-          { command = "exec theme-changer init"; }
+          { command = "awww-daemon"; always = true; }
+          { command = "autotiling"; always = true; }
           { command = "waybar"; }
         ];
 

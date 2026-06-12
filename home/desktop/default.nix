@@ -29,5 +29,6 @@ in
 		openssl.dev
     localsend
     vlc
+    autotiling
   ];
 }
