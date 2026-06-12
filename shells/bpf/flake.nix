@@ -66,6 +66,7 @@
           if ! command -V cargo-generate &> /dev/null; then
           	cargo install cargo-generate
           fi
+
         '';
       };
     };
