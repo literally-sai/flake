@@ -1,5 +1,5 @@
 {
-  description = "Aya eBPF Development Environment";
+  description = "eBPF Development Environment";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -26,6 +26,8 @@
     in
     {
       devShells.${system}.default = pkgs.mkShell {
+        hardeningDisable = [ "all" ];
+
         nativeBuildInputs = with pkgs; [
           pkg-config
           clang
@@ -38,6 +40,10 @@
           libgit2
           libelf
           zlib
+          libbpf
+
+          bcc
+          (python3.withPackages (ps: with ps; [ bcc ]))
         ];
 
         shellHook = ''
@@ -51,12 +57,15 @@
 
           export BPF_CLANG_FLAGS="-I ${pkgs.linuxHeaders}/include"
 
-          export CFLAGS="-fno-zero-call-used-regs=used-gpr -fno-stack-protector"
-          export BPF_CLANG_FLAGS="-I ${pkgs.linuxHeaders}/include $CFLAGS"
+          export BCC_KERNEL_SOURCE="${pkgs.linuxHeaders}"
 
-          cargo-binstall bpf-linker
-          cargo install cargo-generate
+          if ! command -v bpf-linker &> /dev/null; then
+            cargo-binstall bpf-linker -y
+          fi
 
+          if ! command -V cargo-generate &> /dev/null; then
+          	cargo install cargo-generate
+          fi
         '';
       };
     };
