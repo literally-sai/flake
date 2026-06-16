@@ -41,9 +41,12 @@
           libelf
           zlib
           libbpf
+          bpftrace
 
-          bcc
-          (python3.withPackages (ps: with ps; [ bcc ]))
+          (pkgs.python3.withPackages (ps: [
+            ps.pip
+            ps.bcc
+          ]))
         ];
 
         shellHook = ''
@@ -54,6 +57,8 @@
           export OPENSSL_LIB_DIR="${pkgs.openssl.out}/lib"
           export OPENSSL_INCLUDE_DIR="${pkgs.openssl.dev}/include"
           export SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+
+          export PYTHONPATH="${pkgs.bcc}/lib/python${pkgs.python3.pythonVersion}/site-packages:$PYTHONPATH"
 
           export BPF_CLANG_FLAGS="-I ${pkgs.linuxHeaders}/include"
 
@@ -66,7 +71,6 @@
           if ! command -V cargo-generate &> /dev/null; then
           	cargo install cargo-generate
           fi
-
         '';
       };
     };
