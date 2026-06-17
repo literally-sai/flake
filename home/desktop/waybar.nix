@@ -39,7 +39,7 @@
         tooltip = false;
         interval = 5;
         exec = "echo ";
-        exec-if = "pgrep -f vesktop";
+        exec-if = "pgrep Discord";
       };
 
       "custom/steam" = {
