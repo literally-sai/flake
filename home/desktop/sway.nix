@@ -22,13 +22,15 @@
       {
         inherit modifier;
 
+        bars = [];
+
         terminal = "${pkgs.kitty}/bin/kitty --title terminal";
         menu = "${pkgs.rofi}/bin/rofi -show drun";
 
         startup = [
           { command = "awww-daemon"; always = true; }
-          { command = "autotiling"; always = true; }
           { command = "waybar"; }
+          { command = "autotiling"; always = true; }
         ];
 
         gaps = {
@@ -132,10 +134,7 @@
         keybindings =
           let
             mod = modifier;
-            fileManager = "${pkgs.yazi}/bin/yazi";
-            browser = "${pkgs.firefox}/bin/firefox";
             screenLock = "${pkgs.hyprlock}/bin/hyprlock";
-            notes = "obsidian";
             snap = "snap";
             toggleSound = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
             setSound100 = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 100%";
