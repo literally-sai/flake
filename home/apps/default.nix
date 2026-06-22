@@ -12,6 +12,8 @@ in
   home.packages = with pkgs; [
     discord
     zathura
+    zathuraPkgs.zathura_pdf_mupdf
+    zathuraPkgs.zathura_pdf_poppler
     blender
     obs-studio
     pavucontrol

@@ -30,5 +30,7 @@ in
     localsend
     vlc
     autotiling
+    ydotool
+    neovim-remote
   ];
 }
