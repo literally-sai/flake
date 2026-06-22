@@ -26,5 +26,6 @@
     premake5
     nodejs_24
     tcpdump
+    ninja
   ];
 }
