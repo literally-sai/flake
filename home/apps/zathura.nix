@@ -5,11 +5,6 @@
     enable = true;
 
     options = {
-      recolor-lightcolor = "rgba(0, 0, 0, 1.0)";
-      recolor-darkcolor = "rgba(255, 255, 255, 1.0)";
-      recolor = "true";
-      recolor-keephue = "true";
-
       adjust-open = "best";
 
       guioptions = "none";
