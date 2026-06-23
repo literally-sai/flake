@@ -38,7 +38,6 @@
         promptDelete = false;
         trashOption = "local";
         alwaysUpdateLinks = false;
-        newFileLocation = "current";
         newLinkFormat = "relative";
         useMarkdownLinks = true;
         showUnsupportedFiles = true;
@@ -53,7 +52,6 @@
         "daily-notes"
         "editor-status"
         "file-explorer"
-        "file-recovery"
         "global-search"
         "graph"
         "markdown-importer"
