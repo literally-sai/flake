@@ -36,19 +36,21 @@
                 vulkan-loader
                 vulkan-tools
                 libudev-zero
-                xorg.libX11
-                xorg.libXcursor
-                xorg.libXi
-                xorg.libXrandr
+                libx11
+                libxcursor
+                libxi
+                libxrandr
                 libxkbcommon
+                wayland
               ];
             RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
             LD_LIBRARY_PATH = lib.makeLibraryPath [
               vulkan-loader
-              xorg.libX11
-              xorg.libXi
-              xorg.libXcursor
+              libx11
+              libxi
+              libxcursor
               libxkbcommon
+              wayland
             ];
           };
       }
