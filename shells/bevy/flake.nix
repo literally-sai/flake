@@ -30,6 +30,8 @@
               [
                 (rust-bin.stable.latest.default.override { extensions = [ "rust-src" ]; })
                 pkg-config
+                clang
+                mold
               ]
               ++ lib.optionals (lib.strings.hasInfix "linux" system) [
                 alsa-lib
