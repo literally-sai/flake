@@ -36,13 +36,16 @@ in
     wrapperFeatures.gtk = true;
   };
 
-  hardware.enableRedistributableFirmware = true;
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      mesa
-      vulkan-tools
-    ];
+  hardware = {
+    enableRedistributableFirmware = true;
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        mesa
+        vulkan-tools
+      ];
+    };
+    amdgpu.opencl.enable = true;
   };
 
   system.stateVersion = "26.05";
