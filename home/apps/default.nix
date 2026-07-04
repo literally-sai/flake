@@ -23,5 +23,6 @@ in
     pulsemixer
 		papers
 		bambu-studio
+    telegram-desktop
   ];
 }

@@ -44,6 +44,7 @@ in
         mesa
         vulkan-tools
       ];
+      enable32Bit = true;
     };
     amdgpu.opencl.enable = true;
   };
