@@ -24,5 +24,6 @@ in
 		papers
 		bambu-studio
     telegram-desktop
+    ppsspp
   ];
 }
