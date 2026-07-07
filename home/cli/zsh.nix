@@ -82,7 +82,7 @@
                     echo "Usage: devshell <shell-name>"
                     return 1
                 fi
-                nix develop ~/git/flake/shells/$1/
+                nix develop --offline ~/git/flake/shells/$1/
             }
     '';
   };
