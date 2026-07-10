@@ -8,6 +8,7 @@
 {
   wayland.windowManager.sway = {
     enable = true;
+    systemd.enable = true;
     xwayland = true;
 
     extraSessionCommands = ''

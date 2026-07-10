@@ -15,14 +15,20 @@ in
     zathuraPkgs.zathura_pdf_mupdf
     zathuraPkgs.zathura_pdf_poppler
     blender
-    obs-studio
     pavucontrol
     obsidian
-		freecad
+    freecad
     playerctl
     pulsemixer
-		papers
-		bambu-studio
+    papers
+    bambu-studio
     telegram-desktop
   ];
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+    ];
+  };
 }
