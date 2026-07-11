@@ -8,7 +8,8 @@
   xdg = {
     portal = {
       enable = true;
-      config.common.default = "*";
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      config.common.default = "gtk";
     };
     mimeApps = {
       enable = true;
@@ -31,5 +32,4 @@
       };
     };
   };
-
 }

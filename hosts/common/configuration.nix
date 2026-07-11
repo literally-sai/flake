@@ -55,5 +55,8 @@ in
     amdgpu.opencl.enable = true;
   };
 
+  systemd.settings.Manager.DefaultTimeoutStopSec = 10;
+  services.journald.extraConfig = "SystemMaxUse=300M";
+
   system.stateVersion = "26.05";
 }
