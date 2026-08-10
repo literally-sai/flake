@@ -6,11 +6,13 @@
 let
   rose = import ./themes/rose.nix;
   marathon = import ./themes/marathon.nix;
+  lain = import ./themes/lain.nix;
 
   themes = {
     inherit
       rose
       marathon
+      lain
       ;
   };
 
