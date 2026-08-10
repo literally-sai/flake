@@ -37,9 +37,8 @@ in
     LC_TIME = "de_DE.UTF-8";
   };
 
-  programs.sway = {
+  programs.hyprland = {
     enable = true;
-    wrapperFeatures.gtk = true;
   };
 
   hardware = {
@@ -57,6 +56,9 @@ in
 
   systemd.settings.Manager.DefaultTimeoutStopSec = 10;
   services.journald.extraConfig = "SystemMaxUse=300M";
+
+  security.polkit.enable = true;
+  services.dbus.enable = true;
 
   system.stateVersion = "26.05";
 }

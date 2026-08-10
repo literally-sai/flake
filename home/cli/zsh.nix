@@ -70,20 +70,48 @@
     };
 
     initContent = ''
-            bindkey "^[[1;5C" forward-word
-            bindkey "^[[1;5D" backward-word
-            export EDITOR="nvim"
-            export BROWSER="firefox"
-            export TERMINAL="kitty"
-      			export PATH="$HOME/.cargo/bin:$PATH"
+      bindkey "^[[1;5C" forward-word
+      bindkey "^[[1;5D" backward-word
+      export EDITOR="nvim"
+      export BROWSER="firefox"
+      export TERMINAL="kitty"
+      export PATH="$HOME/.cargo/bin:$PATH"
 
-            function devshell() {
-                if [ -z "$1" ]; then
-                    echo "Usage: devshell <shell-name>"
-                    return 1
-                fi
-                nix develop --offline ~/git/flake/shells/$1/
-            }
+      function devshell() {
+        local offline_flag=""
+        local shell_name=""
+
+        while [[ $# -gt 0 ]]; do
+            case "$1" in
+                -o|--offline)
+                    offline_flag="--offline"
+                    shift
+                    ;;
+                *)
+                    if [ -z "$shell_name" ]; then
+                        shell_name="$1"
+                    else
+                        echo "Error: Too many arguments."
+                        return 1
+                    fi
+                    shift
+                    ;;
+            esac
+        done
+
+        if [ -z "$shell_name" ]; then
+            echo "Usage: devshell <shell-name> [-o|--offline]"
+            return 1
+        fi
+
+        nix develop $offline_flag ~/git/flake/shells/"$shell_name"/
+      }
+    '';
+
+    profileExtra = ''
+      if [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+        exec start-hyprland
+      fi
     '';
   };
 }

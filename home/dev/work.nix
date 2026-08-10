@@ -27,5 +27,6 @@
     nodejs_24
     tcpdump
     ninja
+    localstack
   ];
 }

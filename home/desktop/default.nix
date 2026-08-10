@@ -26,7 +26,7 @@ in
     dunst
     grim
     bibata-cursors
-		openssl.dev
+    openssl.dev
     localsend
     vlc
     autotiling
