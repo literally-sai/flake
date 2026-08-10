@@ -22,9 +22,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     awww.url = "git+https://codeberg.org/LGFae/awww";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    bevy_cli = {
+      url = "github:TheBevyFlock/bevy_cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ flake-parts, ... }:
+  outputs =
+    inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
@@ -38,21 +47,27 @@
       };
 
       flake =
-        let 
+        let
           baseSpecialArgs = { inherit inputs; };
-          
-          mkPkgs = system: import inputs.nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-            overlays = [
-              (final: prev: {
-                nur = import inputs.nur {
-                  pkgs = final;
-                  nurpkgs = final;
-                };
-              })
-            ];
-          };
+
+          mkPkgs =
+            system:
+            import inputs.nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+              overlays = [
+                (final: prev: {
+                  nur = import inputs.nur {
+                    pkgs = final;
+                    nurpkgs = final;
+                  };
+                })
+                inputs.rust-overlay.overlays.default
+                (final: prev: {
+                  bevy-cli = inputs.bevy_cli.packages.${system}.default;
+                })
+              ];
+            };
 
           commonNixosModules = [
             inputs.disko.nixosModules.disko
@@ -70,21 +85,27 @@
             "murgo"
           ];
 
-          mkNixos = hostName: inputs.nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            pkgs = mkPkgs "x86_64-linux";
-            specialArgs = baseSpecialArgs // { inherit hostName; };
-            modules = commonNixosModules; 
-          };
-
-          mkHome = hostName: inputs.home-manager.lib.homeManagerConfiguration {
-            pkgs = mkPkgs "x86_64-linux";
-            extraSpecialArgs = baseSpecialArgs // {
-              inherit hostName;
-              inherit (inputs) self;
+          mkNixos =
+            hostName:
+            inputs.nixpkgs.lib.nixosSystem {
+              system = "x86_64-linux";
+              pkgs = mkPkgs "x86_64-linux";
+              specialArgs = baseSpecialArgs // {
+                inherit hostName;
+              };
+              modules = commonNixosModules;
             };
-            modules = commonHomeModules;
-          };
+
+          mkHome =
+            hostName:
+            inputs.home-manager.lib.homeManagerConfiguration {
+              pkgs = mkPkgs "x86_64-linux";
+              extraSpecialArgs = baseSpecialArgs // {
+                inherit hostName;
+                inherit (inputs) self;
+              };
+              modules = commonHomeModules;
+            };
 
         in
         {

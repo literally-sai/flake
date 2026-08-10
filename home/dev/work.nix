@@ -14,11 +14,8 @@
     pkg-config
 
     clang
-    rustup
-    bpftools
     libbpf
     cargo-binstall
-    python3
     gdb
     valgrind
     cmake

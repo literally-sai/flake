@@ -1,4 +1,9 @@
-{ hostName, pkgs, ... }:
+{
+  hostName,
+  inputs,
+  pkgs,
+  ...
+}:
 
 let
   zfsHostId = if hostName == "ghylak" then "deadc0de" else "ea7bee5";
@@ -41,6 +46,13 @@ in
     enable = true;
   };
 
+  nixpkgs.overlays = [
+    inputs.rust-overlay.overlays.default
+    (final: prev: {
+      bevy-cli = inputs.bevy_cli.packages.${prev.stdenv.hostPlatform.system}.default;
+    })
+  ];
+
   hardware = {
     enableRedistributableFirmware = true;
     graphics = {
@@ -48,6 +60,7 @@ in
       extraPackages = with pkgs; [
         mesa
         vulkan-tools
+        vulkan-validation-layers
       ];
       enable32Bit = true;
     };
