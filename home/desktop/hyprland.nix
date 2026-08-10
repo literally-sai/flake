@@ -417,7 +417,7 @@ in
       "50-autostart" = ''
         hl.on("hyprland.start", function()
           hl.exec_cmd("awww-daemon")
-          hl.exec_cmd("${pkgs.waybar}/bin/waybar")
+          hl.exec_cmd("setsid waybar")
           hl.exec_cmd("${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store")
           hl.exec_cmd("${pkgs.wl-clipboard}/bin/wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store")
         end)
