@@ -1,4 +1,8 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 let
   toolchain = pkgs.rust-bin.nightly."2026-05-01".default.override {
     extensions = [
@@ -21,15 +25,46 @@ let
     libXrandr
   ];
 
-  devLibs =
-    runtimeLibs
-    ++ (with pkgs; [
-      openssl
-      libgit2
-      elfutils
-      zlib
-      libbpf
-    ]);
+  buildLibs = with pkgs; [
+    openssl
+    libgit2
+    elfutils
+    zlib
+    libbpf
+  ];
+  foreignBinaryLibs = with pkgs; [
+    stdenv.cc.cc.lib
+    zlib
+    zstd
+    libffi
+  ];
+  ldLibs = runtimeLibs ++ buildLibs ++ foreignBinaryLibs;
+
+  pkgConfigLibs = runtimeLibs ++ buildLibs;
+
+  envVars = {
+    LD_LIBRARY_PATH = lib.makeLibraryPath ldLibs;
+    RUST_SRC_PATH = "${toolchain}/lib/rustlib/src/rust/library";
+    LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
+    PKG_CONFIG_PATH =
+      "${lib.makeSearchPathOutput "dev" "lib/pkgconfig" pkgConfigLibs}"
+      + "\${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}";
+    OPENSSL_DIR = "${pkgs.openssl.dev}";
+    OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
+    OPENSSL_INCLUDE_DIR = "${pkgs.openssl.dev}/include";
+    BPF_CLANG_FLAGS = "-I ${pkgs.linuxHeaders}/include";
+    BCC_KERNEL_SOURCE = "${pkgs.linuxHeaders}";
+  };
+
+  envScript = ''
+    if [ -z "''${__DEV_LANGS_ENV_LOADED:-}" ]; then
+      export __DEV_LANGS_ENV_LOADED=1
+  ''
+  + lib.concatStringsSep "\n" (lib.mapAttrsToList (n: v: ''export ${n}="${v}"'') envVars)
+  + ''
+
+    fi
+  '';
 in
 {
   home.packages = [
@@ -42,25 +77,22 @@ in
     cargo-generate
   ]);
 
-  home.sessionVariables = {
-    RUST_SRC_PATH = "${toolchain}/lib/rustlib/src/rust/library";
-    LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
+  home.sessionVariables = envVars;
 
-    PKG_CONFIG_PATH =
-      "${lib.makeSearchPathOutput "dev" "lib/pkgconfig" devLibs}"
-      + "\${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}";
+  home.file.".config/dev-langs-env.sh".text = envScript;
 
-    OPENSSL_DIR = "${pkgs.openssl.dev}";
-    OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
-    OPENSSL_INCLUDE_DIR = "${pkgs.openssl.dev}/include";
-    BPF_CLANG_FLAGS = "-I ${pkgs.linuxHeaders}/include";
-    BCC_KERNEL_SOURCE = "${pkgs.linuxHeaders}";
-  };
+  programs.zsh.envExtra = envScript;
+  programs.bash.initExtra = envScript;
+  programs.fish.shellInit = ''
+    if not set -q __DEV_LANGS_ENV_LOADED
+      bash -c 'true'
+    end
+  '';
 
   home.file.".cargo/config.toml".text = ''
     [env]
     PKG_CONFIG_PATH = { value = "${
-      lib.makeSearchPathOutput "dev" "lib/pkgconfig" devLibs
+      lib.makeSearchPathOutput "dev" "lib/pkgconfig" pkgConfigLibs
     }", force = false }
     LIBCLANG_PATH = { value = "${pkgs.llvmPackages.libclang.lib}/lib", force = false }
 

@@ -11,6 +11,17 @@
       selection-clipboard = "clipboard";
       synctex = true;
       synctex-editor-command = "nvr --remote-silent +%{line} %{input}";
+
+      recolor = true;
+      recolor-keephue = true;
+
+      recolor-lightcolor = "#00000000";
+      recolor-darkcolor = "#E0E0E0";
+
+      default-bg = "rgba(0, 0, 0, 0)";
+      default-fg = "#E0E0E0";
+      statusbar-bg = "rgba(0, 0, 0, 0)";
+      statusbar-fg = "#E0E0E0";
     };
 
     extraConfig = ''

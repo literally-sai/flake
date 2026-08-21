@@ -385,14 +385,14 @@ in
         hl.bind(mod .. " + SHIFT + comma", hl.dsp.window.move({ monitor = "-", follow = true }))
         hl.bind(mod .. " + SHIFT + period", hl.dsp.window.move({ monitor = "+", follow = true }))
 
-        hl.bind(mod .. " + P", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 10%+"), { repeating = true })
+        hl.bind(mod .. " + P", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+"), { repeating = true })
         hl.bind(mod .. " + O", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-"), { repeating = true })
         hl.bind(mod .. " + SHIFT + P", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 100%"))
         hl.bind(mod .. " + SHIFT + O", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
         hl.bind(mod .. " + I", hl.dsp.exec_cmd("brightnessctl set 10%-"), { repeating = true })
         hl.bind(mod .. " + bracketleft", hl.dsp.exec_cmd("brightnessctl set 10%+"), { repeating = true })
 
-        hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
+        hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
         hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true, repeating = true })
         hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
         hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
