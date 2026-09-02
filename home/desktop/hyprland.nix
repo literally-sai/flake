@@ -24,8 +24,12 @@ let
   monitors =
     if isDesktop then
       ''
+        -- DP-3: main 1440p panel, logical size 1920x1080 after the 1.333333 scale
         hl.monitor({ output = "DP-3", mode = "2560x1440@60", position = "0x0", scale = 1.333333 })
-        hl.monitor({ output = "DP-2", mode = "1920x1080@60", position = "1920x0", scale = 1 })
+
+        -- DP-2: Huion Kamvas 22 pen display (native 1920x1080, never scale a drawing surface)
+        -- If the Kamvas physically sits *below* the main monitor, swap "auto-right" for "0x1080"
+        hl.monitor({ output = "DP-2", mode = "1920x1080@60", position = "auto-right", scale = 1 })
       ''
     else if isLaptop then
       ''
@@ -58,7 +62,7 @@ let
     hl.config({
       input = {
         tablet = {
-          output = "DP-3",
+          output = "DP-2",
         },
       },
     })
@@ -79,6 +83,40 @@ let
 
     hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
     hl.gesture({ fingers = 4, direction = "up", action = "special", workspace_name = "magic" })
+  '';
+
+  # Keep the canvas fully opaque and undimmed - inactive_opacity + dim_inactive
+  # would otherwise wash out colours whenever a reference window takes focus.
+  kritaRule =
+    if isDesktop then
+      ''
+        hl.window_rule({
+          name = "krita-canvas",
+          match = { class = "^(krita)$" },
+          workspace = "6",
+          opaque = true,
+          no_blur = true,
+          no_dim = true,
+        })
+      ''
+    else
+      ''
+        hl.window_rule({
+          name = "krita-canvas",
+          match = { class = "^(krita)$" },
+          opaque = true,
+          no_blur = true,
+          no_dim = true,
+        })
+      '';
+
+  # ghylak has no internal backlight, so brightnessctl is a no-op there.
+  brightnessBinds = lib.optionalString isLaptop ''
+    hl.bind(mod .. " + I", hl.dsp.exec_cmd("brightnessctl set 10%-"), { repeating = true })
+    hl.bind(mod .. " + bracketleft", hl.dsp.exec_cmd("brightnessctl set 10%+"), { repeating = true })
+
+    hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
+    hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
   '';
 in
 {
@@ -282,6 +320,8 @@ in
         hl.window_rule({ match = { class = "^(vesktop|discord|WebCord)$" }, opacity = "0.95 0.88" })
         hl.window_rule({ match = { class = "^(steam|steam_app.*|gamescope)$" }, opaque = true, no_blur = true })
 
+        ${kritaRule}
+
         hl.window_rule({
           name = "pip",
           match = { title = ".*Picture-in-Picture.*" },
@@ -389,15 +429,13 @@ in
         hl.bind(mod .. " + O", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-"), { repeating = true })
         hl.bind(mod .. " + SHIFT + P", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 100%"))
         hl.bind(mod .. " + SHIFT + O", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
-        hl.bind(mod .. " + I", hl.dsp.exec_cmd("brightnessctl set 10%-"), { repeating = true })
-        hl.bind(mod .. " + bracketleft", hl.dsp.exec_cmd("brightnessctl set 10%+"), { repeating = true })
+
+        ${brightnessBinds}
 
         hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
         hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true, repeating = true })
         hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
         hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
-        hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
-        hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
         hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
         hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
         hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })

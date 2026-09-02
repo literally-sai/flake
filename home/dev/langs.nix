@@ -11,6 +11,7 @@ let
       "clippy"
       "rustfmt"
     ];
+    targets = [ "wasm32-unknown-unknown" ];
   };
 
   runtimeLibs = with pkgs; [
@@ -75,6 +76,8 @@ in
     clang
     mold
     cargo-generate
+    wasm-bindgen-cli
+    binaryen
   ]);
 
   home.sessionVariables = envVars;
