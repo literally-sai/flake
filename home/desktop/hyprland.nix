@@ -41,17 +41,6 @@ let
       '';
 
   workspaces =
-    if isDesktop then
-      ''
-        for i = 1, 5 do
-          hl.workspace_rule({ workspace = tostring(i), monitor = "DP-3", default = i == 1, persistent = i <= 2 })
-        end
-
-        for i = 6, 10 do
-          hl.workspace_rule({ workspace = tostring(i), monitor = "DP-2", default = i == 6, persistent = i == 6 })
-        end
-      ''
-    else
       ''
         for i = 1, 4 do
           hl.workspace_rule({ workspace = tostring(i), persistent = i == 1 })
