@@ -16,6 +16,7 @@ in
     eza
     tree
     unzip
+    tmux
     exiftool
     wl-clipboard
     todo
