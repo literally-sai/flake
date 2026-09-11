@@ -6,7 +6,7 @@
 }:
 
 let
-  zfsHostId = if hostName == "ghylak" then "deadc0de" else "ea7bee5";
+  zfsHostId = if hostName == "ghylak" then "deadc0de" else "bea7bee5";
 in
 {
   imports = [ ../${hostName}/hardware.nix ];
