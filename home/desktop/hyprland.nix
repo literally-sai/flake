@@ -24,12 +24,8 @@ let
   monitors =
     if isDesktop then
       ''
-        -- DP-3: main 1440p panel, logical size 1920x1080 after the 1.333333 scale
-        hl.monitor({ output = "DP-3", mode = "2560x1440@60", position = "0x0", scale = 1.333333 })
-
-        -- DP-2: Huion Kamvas 22 pen display (native 1920x1080, never scale a drawing surface)
-        -- If the Kamvas physically sits *below* the main monitor, swap "auto-right" for "0x1080"
-        hl.monitor({ output = "DP-2", mode = "1920x1080@60", position = "auto-right", scale = 1 })
+      hl.monitor({ output = "DP-2", mode = "1920x1080@60", position = "0x0", scale = 1 })
+      hl.monitor({ output = "DP-3", mode = "2560x1440@60", position = "auto-right", scale = 1.333333 })
       ''
     else if isLaptop then
       ''

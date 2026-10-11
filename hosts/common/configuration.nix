@@ -68,7 +68,7 @@ in
   };
 
   systemd.settings.Manager.DefaultTimeoutStopSec = 10;
-  services.journald.extraConfig = "SystemMaxUse=300M";
+  services.journald.settings.Journal.SystemMaxUse = "300M";
 
   security.polkit.enable = true;
   services.dbus.enable = true;
