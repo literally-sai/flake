@@ -24,8 +24,8 @@ let
   monitors =
     if isDesktop then
       ''
-      hl.monitor({ output = "DP-2", mode = "1920x1080@60", position = "0x0", scale = 1 })
-      hl.monitor({ output = "DP-3", mode = "2560x1440@60", position = "auto-right", scale = 1.333333 })
+        hl.monitor({ output = "DP-2", mode = "1920x1080@60", position = "0x0", scale = 1 })
+        hl.monitor({ output = "DP-3", mode = "2560x1440@60", position = "auto-right", scale = 1.333333 })
       ''
     else if isLaptop then
       ''
@@ -36,12 +36,11 @@ let
         hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
       '';
 
-  workspaces =
-      ''
-        for i = 1, 4 do
-          hl.workspace_rule({ workspace = tostring(i), persistent = i == 1 })
-        end
-      '';
+  workspaces = ''
+    for i = 1, 4 do
+      hl.workspace_rule({ workspace = tostring(i), persistent = i == 1 })
+    end
+  '';
 
   tablet = lib.optionalString isDesktop ''
     hl.config({
@@ -109,7 +108,7 @@ in
     enable = true;
     package = null;
     configType = "lua";
-    systemd.enable = false;
+    systemd.enable = true;
     xwayland.enable = true;
 
     extraLuaFiles = {
@@ -439,8 +438,8 @@ in
 
       "50-autostart" = ''
         hl.on("hyprland.start", function()
+          hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE")
           hl.exec_cmd("awww-daemon")
-          hl.exec_cmd("setsid waybar")
           hl.exec_cmd("${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store")
           hl.exec_cmd("${pkgs.wl-clipboard}/bin/wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store")
         end)
