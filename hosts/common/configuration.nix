@@ -46,6 +46,12 @@ in
     enable = true;
   };
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = [ "hyprland" "gtk" ];
+  };
+
   nixpkgs.overlays = [
     inputs.rust-overlay.overlays.default
     (final: prev: {
