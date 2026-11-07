@@ -58,8 +58,8 @@ let
     };
     radius = 12;
     gaps = {
-      inner = 6;
-      outer = 10;
+      inner = 4;
+      outer = 1;
     };
   };
 

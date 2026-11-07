@@ -13,7 +13,7 @@
   environment.systemPackages = with pkgs; [
     steam
     steam-run
-    wineWow64Packages.stable
+    wineWowPackages.waylandFull
     lutris
     winetricks
     protontricks

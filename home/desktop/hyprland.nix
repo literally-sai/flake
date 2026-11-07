@@ -94,7 +94,6 @@ let
         })
       '';
 
-  # ghylak has no internal backlight, so brightnessctl is a no-op there.
   brightnessBinds = lib.optionalString isLaptop ''
     hl.bind(mod .. " + I", hl.dsp.exec_cmd("brightnessctl set 10%-"), { repeating = true })
     hl.bind(mod .. " + bracketleft", hl.dsp.exec_cmd("brightnessctl set 10%+"), { repeating = true })
