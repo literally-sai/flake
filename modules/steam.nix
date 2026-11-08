@@ -7,7 +7,6 @@
     dedicatedServer.openFirewall = true;
   };
 
-
   users.extraGroups.steam.members = [ "sai" ];
 
   environment.systemPackages = with pkgs; [
