@@ -39,6 +39,5 @@ in
     jq
     procs
     tldr
-    rusty-man
   ];
 }
